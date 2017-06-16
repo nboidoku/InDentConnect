@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="pocApp" >
+<head>
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Angular -->
+    <script src="../vendor/angular/angular.min.js"></script>
+
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <script src="app.js"></script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjX5iHmsGWJTvxIyK10z0_oJQMv7_ZlOc">
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-controller="pocController as model">
+
+<h3>Google Maps Distance Matrix API</h3>
+
+<div class="container">
+
+    <label for="origin">Origin</label>
+    <input id="origin"
+           ng-model="model.origin"
+           placeholder="Madrid, Spain"
+           class="form-control"/>
+
+    <label for="destination">Destination</label>
+    <input id="destination"
+           placeholder="Lisbon, Portugal"
+           ng-model="model.destination"
+           class="form-control"/>
+
+    <button style="margin-top:10px"
+            class="btn btn-block btn-primary"
+            ng-click="model.findInfo(model.origin, model.destination)">
+        Calculate Distance
+    </button>
+
+    <div style="margin-top: 10px" ng-show="model.message"
+         class="alert alert-info">
+        {{model.message}}
+    </div>
+
+
+
+</div>
+
+
+
+
+
+</body>
+
+
+
+
+</html>

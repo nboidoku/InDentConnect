@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="InDentConnect">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Home Page</title>
+
+    <!--JQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="../vendor/jquery/jquery-ui.js"></script>
+
+    <!-- Angular -->
+    <script src="../vendor/angular/angular.min.js"></script>
+    <script src="../vendor/angular/angular-route.min.js"></script>
+    <script src="../vendor/angular/angular-route.min.js"></script>
+
+    <!-- Mains -->
+    <script src="app.js"></script>
+    <script src="config.js"></script>
+
+    <!-- Home -->
+    <script src="views/home/controllers/home.controller.client.html.js"></script>
+
+    <!-- User -->
+    <script src="views/user/controllers/login.controller.client.js"></script>
+    <script src="views/user/controllers/register.controller.client.js"></script>
+    <script src="views/user/controllers/profile.controller.client.js"></script>
+
+    <!-- Task -->
+    <script src="views/task/controllers/task-home.controller.client.js"></script>
+    <script src="views/task/controllers/task-info.controller.client.js"></script>
+    <script src="views/task/controllers/task-new.controller.client.js"></script>
+
+    <!-- News -->
+    <script src="views/news/controllers/news-list.controller.client.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../vendor/bootstrap/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <!-- Style -->
+    <link href="css/styles.css" rel="stylesheet"/>
+
+</head>
+
+
+<body>
+
+<div ng-view></div>
+
+</body>
+
+
+</html>

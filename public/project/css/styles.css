@@ -1,0 +1,17 @@
+body {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.form-control {
+    margin-bottom: 10px;
+}
+
+a.brand-header{
+    color: #777;
+    text-decoration-line: none;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+
+
