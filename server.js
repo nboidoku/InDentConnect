@@ -14,6 +14,6 @@ app.set('view engine', 'ejs');
 
 app.use(app.express.static(__dirname + '/public'));
 
-require('./assignment/app');
+require('./connect/app');
 
 app.listen(process.env.PORT || 3000);

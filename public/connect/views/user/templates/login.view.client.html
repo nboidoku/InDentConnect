@@ -1,0 +1,32 @@
+<div ng-include="'views/common/navbar.view.client.html'"></div>
+
+
+<div>
+
+    <h3 class="text-center"> LOGIN </h3>
+
+    <div class="container">
+        <label for="username">Username</label>
+        <input class="form-control"
+               id="username"
+               placeholder="username"
+               ng-model="model.user.username"
+               />
+        <label for="password">Password</label>
+        <input class="form-control"
+               type="password"
+               id="password"
+               placeholder="password"
+               ng-model="model.user.password"
+               />
+
+        <button class="btn btn-block btn-primary"
+                ng-click="model.login(model.user.username, model.user.password)"
+                >Login</button>
+        <a href="#!/register"
+           >Dont have an account? Register here</a>
+    </div>
+
+
+</div>
+

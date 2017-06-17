@@ -1,0 +1,61 @@
+<div class="container">
+    <h3 class="text-center"> REGISTER </h3>
+
+    {{model.message}}
+
+    <label class="control-label"
+           for="username">Username</label>
+    <input id="username"
+           placeholder="username"
+           class="form-control"
+           ng-model="username"
+    />
+
+    <label class="control-label"
+           for="password">Password</label>
+    <input id="password"
+           placeholder="password"
+           type="password"
+           class="form-control"
+           ng-model="password"
+    />
+
+    <label class="control-label"
+           for="verifyPassword">Verify Password</label>
+    <input id="verifyPassword"
+           placeholder="re-enter password"
+           type="password"
+           class="form-control"
+           ng-model="verify"
+    />
+
+    <label class="control-label"
+           for="email">Email</label>
+    <input id="email"
+           placeholder="email"
+           type="email"
+           class="form-control"
+           ng-model="email"
+    />
+
+    <label class="control-label" for="dob">Date of Birth</label>
+    <input id="dob"
+           type="date"
+           class="form-control"
+           ng-model="dob"
+    />
+
+
+    <button ng-click="model.register(username, password, verify, email, dob)"
+            class="btn btn-block btn-success">
+        Register
+    </button>
+    <a href="#!/login">
+        Already have an account? Sign in here
+    </a>
+
+</div>
+
+
+
+

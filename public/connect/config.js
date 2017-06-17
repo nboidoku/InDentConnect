@@ -20,22 +20,22 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('/profile', {
+            .when('user/:userId', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
                 controllerAs: 'model'
             })
-            .when('/task', {
+            .when('user/:userId/task', {
                 templateUrl: 'views/task/templates/task-home.view.client.html',
                 controller: 'taskHomeController',
                 controllerAs: 'model'
             })
-            .when('/task/new', {
+            .when('user/:userId/task/new', {
                 templatesUrl: 'views/task/templates/task-new.view.client.html',
                 controller: 'taskNewController',
                 controllerAs: 'model'
             })
-            .when('/task/info', {
+            .when('user/:userId/task/:taskId', {
                 templateUrl: 'views/task/templates/task-info.view.client.html',
                 controller: 'taskInfoController',
                 controllerAs: 'model'

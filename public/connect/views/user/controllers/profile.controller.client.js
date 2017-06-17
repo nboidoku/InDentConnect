@@ -5,7 +5,8 @@
 
 
     function profileController() {
-        console.log('profileController active');
+
+        var model = this;
     }
 })
 ();

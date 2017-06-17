@@ -1,11 +1,11 @@
 var app = require('../../express');
 var userModel = require('../models/user/user.model.server');
 
-app.get('/api/InDent/user/:userId', findUserById);
-app.get('/api/InDent/user', findUser);
-app.post('/api/InDent/user', createUser);
-app.put('/api/InDent/user/:userId', updateUser);
-app.delete('/api/InDent/user/:userId', deleteUser);
+app.get('/api/connect/user/:userId', findUserById);
+app.get('/api/connect/user', findUser);
+app.post('/api/connect/user', createUser);
+app.put('/api/connect/user/:userId', updateUser);
+app.delete('/api/connect/user/:userId', deleteUser);
 
 
 function findUserById(req, res) {
@@ -48,6 +48,8 @@ function createUser(req, res) {
 }
 
 function findUser(req, res) {
+    console.log('here')
+
     if (req.query['username'] && req.query['password']) {
         var username = req.query['username'];
         var password = req.query['password'];

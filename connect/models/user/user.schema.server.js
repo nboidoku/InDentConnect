@@ -6,8 +6,9 @@ var userSchema = mongoose.Schema({
     email: {type:String, require: true},
     dob: Date,
     username: {type: String, require:true },
+    password: {type: String},
     rating: Number,
-    followers: [{type: mongoose.Schema.ObjectId, ref:"IUserModel"}]
-}, {collection: "InDentUsers"});
+    followers: [{type: mongoose.Schema.ObjectId, ref:"UserModel"}]
+}, {collection: "users"});
 
-model.exports = userSchema;
+module.exports = userSchema;
