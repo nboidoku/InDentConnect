@@ -20,12 +20,29 @@
                 controller: 'registerController',
                 controllerAs: 'model'
             })
-            .when('user/:userId', {
+            .when('/profile', {
                 templateUrl: 'views/user/templates/profile.view.client.html',
                 controller: 'profileController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
-            .when('user/:userId/task', {
+            .when('/admin', {
+                templateUrl: 'views/admin/templates/admin.view.client.html'/*,
+                resolve: {
+                    currentUser: checkAdmin
+                }*/
+            })
+            .when('/admin/users', {
+                templateUrl: 'views/admin/templates/admin-users.view.client.html',
+                controller: 'adminUsersController',
+                controllerAs: 'model'/*,
+                resolve: {
+                    currentUser: checkAdmin
+                }*/
+            })
+            /*.when('user/:userId/task', {
                 templateUrl: 'views/task/templates/task-home.view.client.html',
                 controller: 'taskHomeController',
                 controllerAs: 'model'
@@ -44,7 +61,22 @@
                 templateUrl: 'views/news/templates/news-list.view.client.html',
                 controller: 'newsListController',
                 controllerAs: 'model'
-            })
+            })*/
+    }
+
+    function checkLoggedIn($q, $location, userService) {
+        var deferred = $q.defer();
+        userService
+            .checkLoggedIn()
+            .then(function (currentUser) {
+                if(currentUser === '0') {
+                    deferred.reject();
+                    $location.url('/login');
+                } else {
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
     }
 })
 ();

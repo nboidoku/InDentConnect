@@ -1,3 +1,7 @@
+<div ng-include="'views/common/templates/navbar.view.client.html'">
+
+</div>
+
 <div>
 
     <div class="container">
@@ -24,7 +28,7 @@
                ng-model="model.user.lastName"
         />
 
-        <label for="dob"></label>
+        <label for="dob">Date of Birth</label>
         <input id="dob"
                class="form-control"
                ng-model="user.username.dob"
@@ -36,6 +40,17 @@
                class="form-control"
                ng-model="model.user.email"
         />
+
+        <a ng-click="model.updateUser(model.user)"
+           class="btn btn-block btn-success">Update</a>
+
+        <a href="#!/user/{{model.user._id}}/task"
+           class="btn btn-block btn-primary">Task Page</a>
+
+        <a ng-click="model.unregister()"
+           class="btn btn-block btn-danger">Unregister</a>
+
+        <a ng-click="model.logout()" class="btn btn-block btn-warning">Logout</a>
 
     </div>
 

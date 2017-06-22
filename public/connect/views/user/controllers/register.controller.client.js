@@ -3,71 +3,102 @@
         .module('InDentConnect')
         .controller('registerController', registerController);
 
-
     function registerController($location, userService) {
+
         var model = this;
 
-        model.register = function (username, password, verify, email, dob) {
+        // event handlers
+        model.register = register;
+
+        // implementation
+        function register(username, password, password2, email, dob) {
+
+
+            model.emptyUsername = "";
+            model.emptyPassword = "";
+            model.emptyPassword2 = "";
+
+
+            if (!username) {
+                model.emptyUsername = "enter a username";
+                return
+            }
+
+            if (!password) {
+                model.emptyPassword = "enter a password";
+                return
+            }
+
+            if (!password2) {
+                model.emptyPassword2 = "retype password";
+                return
+            }
+
+            if (!email) {
+                model.emptyEmail = "Please enter email"
+            }
+
+            if (!dob) {
+                model.emptyDob = "Please enter a date of birth"
+            }
+
 
             userService
                 .findUserByUsername(username)
                 .then(function (found) {
+                    console.log(found);
                     if (found) {
                         handleError('username')
                     }
-                    else verifyPassword();
+                    else {
+                        registerUser();
+                    }
+                })
+                .findUserByEmail(email)
+                .then(function (found) {
+                    if (found) {
+                        handleError('email')
+                    }
+                    else {
+                        registerUser();
+                    }
                 });
 
-            function verifyPassword() {
-                if (password !== verify) {
-                    handleError('password');
-                }
-                else verifyEmail();
-            }
+            function registerUser() {
 
-            function verifyEmail() {
-                if (email) {
-                    verifyDob();
+                if (password !== password2) {
+                    handleError('password')
                 }
                 else {
-                    handleError('email')
+                    var user = {
+                        username:username,
+                        password:password,
+                        email: email,
+                        dob: dob
+                    };
+                    userService
+                        .register(user)
+                        .then(function (user) {
+                            $location.url('/profile');
+                        })
                 }
-            }
 
-            function verifyDob() {
-                registerUser();
             }
 
             function handleError(error) {
                 switch(error) {
                     case 'username':
-                        model.message = "Username "+ error + " already exists";
+                        model.error = "Username " + username+ " is not" +
+                            " available";
                         break;
-                    case 'password:':
-                        model.message = "Passwords do not match";
-                        break;
-                    case 'email':
-                        model.message = "Invalid email";
+                    case 'password':
+                        model.error = "passwords must match";
                         break;
                     default:
-                        model.message = "Error, please try again";
+                        model.error = "error, please try again";
                 }
             }
 
-            function registerUser() {
-                var user = {
-                    username: username,
-                    password: password,
-                    email: email,
-                    dob: dob
-                };
-                userService
-                    .createUser(user)
-                    .then(function (user) {
-                        $location.url('/user/'+user._id);
-                    })
-            }
         }
     }
-})
-();
+})();

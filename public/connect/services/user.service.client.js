@@ -6,33 +6,62 @@
 
     function userService($http) {
         return {
-            findUserByCredentials: findUserByCredentials,
-            findUserByUsername: findUserByUsername,
             findUserById: findUserById,
-            updateUser: updateUser,
+            login : login,
+            findUserByUsername: findUserByUsername,
+            logout:logout,
+            checkLoggedIn: checkLoggedIn,
+            checkAdmin: checkAdmin,
+            findAllUsers: findAllUsers,
+            register: register,
+            createUser: createUser,
             deleteUser: deleteUser,
-            createUser: createUser
+            unregister: unregister,
+            updateUser: updateUser
         };
 
         function createUser(user) {
-            var url = '/api/connect/user';
-            return $http
-                .post(url, user)
-                .then(function (response) {
-                    return response.data;
-                })
-        }
-        function findUserByCredentials(username, password){
-            var url = '/api/connect/user?username='+username+'&password='+password;
-            return $http
-                .get(url)
+            var url = "/api/connect/user";
+            return $http.post(url, user)
                 .then(function (response) {
                     return response.data;
                 })
         }
 
+        function login(username, password) {
+            var url = "/api/connect/login";
+            var credentials = {
+                username: username,
+                password: password
+            };
+            return $http
+                .post(url, credentials)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function logout() {
+            var url = '/api/connect/logout';
+            return $http
+                .post(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function checkLoggedIn() {
+            var url = "/api/connect/checkLoggedIn";
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data
+                });
+
+        }
+
         function findUserByUsername(username) {
-            var url = '/api/connect/user?username='+username;
+            var url = "/api/connect/user?username="+ username;
             return $http
                 .get(url)
                 .then(function (response) {
@@ -44,6 +73,23 @@
             var url = '/api/connect/user/'+userId;
             return $http
                 .get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function register(user) {
+            var url = "/api/connect/register";
+            return $http
+                .post(url, user)
+                .then(function (response) {
+                    return response.data
+                })
+        }
+
+        function unregister() {
+            var url = "/api/connect/unregister";
+            return $http.delete(url)
                 .then(function (response) {
                     return response.data;
                 })
@@ -65,6 +111,24 @@
                 .then(function (response) {
                     return response.data;
                 })
+        }
+
+        function findAllUsers() {
+            var url = "/api/connect/users";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function checkAdmin() {
+            var url = "/api/assignment/checkAdmin";
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data
+                });
+
         }
     }
 })

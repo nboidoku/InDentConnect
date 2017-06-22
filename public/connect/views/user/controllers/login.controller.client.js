@@ -1,29 +1,43 @@
 (function () {
     angular
         .module('InDentConnect')
-        .controller('loginController', loginController)
+        .controller('loginController', loginController);
 
-    function loginController(userService, $location) {
+
+    function loginController($location, userService) {
 
         var model = this;
 
-        model.login = function (){
+        model.login = function (username, password) {
+
+            model.emptyUsername = "";
+            model.emptyPassword = "";
+
+            if (!username) {
+                model.emptyUsername = "enter a username";
+                return
+            }
+
+            if (!password) {
+                model.emptyPassword = "enter a password";
+                return
+            }
 
             userService
-                .findUserBbyCredentials(username, password)
+                .login(username, password)
                 .then(login, handleError);
 
-
             function handleError(error) {
-                model.message = "Username " + username + " does not exist with that password";
+                model.message = "Username " + username + " not found with" +
+                    " that password, please try again";
             }
 
             function login(found) {
                 if (found !== null) {
-                    $location.url('/user/'+ found.id);
-                }
-                else {
-                    model.message = "Username " + username + " does not exist with that password"
+                    $location.url('/profile');
+                } else {
+                    model.message = "Username " + username + " not found" +
+                        " with that password, please try again";
                 }
             }
         }

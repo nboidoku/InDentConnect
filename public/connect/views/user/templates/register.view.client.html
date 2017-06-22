@@ -1,8 +1,11 @@
+<div ng-include="'views/common/templates/navbar.view.client.html'"></div>
+
 <div class="container">
     <h3 class="text-center"> REGISTER </h3>
 
-    {{model.message}}
-
+    <div ng-show=model.emptyUsername class="alert alert-danger">
+        {{model.emptyUsername}}
+    </div>
     <label class="control-label"
            for="username">Username</label>
     <input id="username"
@@ -11,6 +14,9 @@
            ng-model="username"
     />
 
+    <div ng-show=model.emptyPassword class="alert alert-danger">
+        {{model.emptyPassword}}
+    </div>
     <label class="control-label"
            for="password">Password</label>
     <input id="password"
@@ -20,6 +26,9 @@
            ng-model="password"
     />
 
+    <div ng-show=model.emptyPassword2 class="alert alert-danger">
+        {{model.emptyPassword2}}
+    </div>
     <label class="control-label"
            for="verifyPassword">Verify Password</label>
     <input id="verifyPassword"
@@ -29,6 +38,9 @@
            ng-model="verify"
     />
 
+    <div ng-show="model.emptyEmail" class="alert alert-danger">
+        {{model.emptyEmail}}
+    </div>
     <label class="control-label"
            for="email">Email</label>
     <input id="email"
@@ -38,6 +50,9 @@
            ng-model="email"
     />
 
+    <div ng-show="model.emptyDob" class="alert alert-danger">
+        {{model.emptyDob}}
+    </div>
     <label class="control-label" for="dob">Date of Birth</label>
     <input id="dob"
            type="date"

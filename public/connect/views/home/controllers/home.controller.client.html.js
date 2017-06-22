@@ -6,7 +6,6 @@
 
     function homeController() {
 
-        console.log('homeController active');
     }
 })
 ();

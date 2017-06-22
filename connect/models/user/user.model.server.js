@@ -6,14 +6,26 @@ userModel.createUser = createUser;
 userModel.findUserById = findUserById;
 userModel.findUserByUsername = findUserByUsername;
 userModel.updateUser = updateUser;
+userModel.findAllUsers = findAllUsers;
 userModel.deleteUser = deleteUser;
+userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.findUserByFacebookId = findUserByFacebookId;
 
 
 module.exports = userModel;
 
+function findUserByGoogleId(googleId) {
+    return userModel.findOne({'google.id' : googleId});
+}
+
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({'facebook.id' : facebookId});
+}
 
 function createUser(user) {
-    return userModel.create(user)
+    user.roles = ['CLIENT'];
+    return userModel
+        .create(user)
 }
 
 function findUserById(userId) {
@@ -33,6 +45,10 @@ function updateUser(userId, user) {
     })
 }
 
+function findAllUsers() {
+    return userModel.find();
+}
+
 function deleteUser(userId) {
-    return userModel.remove(userId);
+    return userModel.remove({_id: userId});
 }

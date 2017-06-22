@@ -1,0 +1,26 @@
+<div class="container-fluid">
+    <h1>Admin Users</h1>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <label for="username">
+                Username
+            </label>
+            <input ng-model="newUsername"
+                    id="username"
+            />
+            <label for="password">
+                Password
+            </label>
+            <input
+                    ng-model="newPassword"
+                    id="password" />
+            <button ng-click="model.createUser(newUsername, newPassword)"
+                    class="btn-primary">Create</button>
+        </li>
+        <li ng-repeat="user in model.users" class="list-group-item">
+            <a ng-click="model.deleteUser(user)"><span
+                    class="glyphicon glyphicon-remove pull-right"></span></a>
+            {{user.username}} {{user.firstName}} {{user.lastName}} {{user.roles}}
+        </li>
+    </ul>
+</div>
