@@ -42,24 +42,38 @@
                     currentUser: checkAdmin
                 }
             })
-            .when('user/task', {
+            .when('/user/task', {
                 templateUrl: 'views/task/templates/task-home.view.client.html',
                 controller: 'taskHomeController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn
                 }
-            })/*
-            .when('user/:userId/task/new', {
-                templatesUrl: 'views/task/templates/task-new.view.client.html',
-                controller: 'taskNewController',
-                controllerAs: 'model'
             })
-            .when('user/:userId/task/:taskId', {
+            .when('/user/task/new', {
+                templateUrl: 'views/task/templates/task-new.view.client.html',
+                controller: 'taskNewController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            .when('/user/task/:taskId', {
                 templateUrl: 'views/task/templates/task-info.view.client.html',
                 controller: 'taskInfoController',
-                controllerAs: 'model'
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
             })
+            .when('/user/task/edit/:taskId', {
+                templateUrl: 'views/task/templates/task-edit.view.client.html',
+                controller: 'taskEditController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })/*
             .when('/news', {
                 templateUrl: 'views/news/templates/news-list.view.client.html',
                 controller: 'newsListController',
@@ -75,6 +89,21 @@
                 if(currentUser === '0') {
                     deferred.reject();
                     $location.url('/login');
+                } else {
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
+    }
+
+    function checkAdmin($q, $location, userService) {
+        var deferred = $q.defer();
+        userService
+            .checkAdmin()
+            .then(function (currentUser) {
+                if(currentUser === '0') {
+                    deferred.resolve({});
+                    $location.url('/');
                 } else {
                     deferred.resolve(currentUser);
                 }

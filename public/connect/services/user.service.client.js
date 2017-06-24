@@ -122,7 +122,7 @@
         }
 
         function checkAdmin() {
-            var url = "/api/assignment/checkAdmin";
+            var url = "/api/connect/checkAdmin";
             return $http
                 .get(url)
                 .then(function (response) {

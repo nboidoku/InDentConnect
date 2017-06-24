@@ -20,8 +20,9 @@
         function deleteUser(user) {
             userService
                 .deleteUser(user._id)
-                .then(findAllUsers());
-
+                .then(function () {
+                    init();
+                });
         }
 
         function findAllUsers() {
@@ -39,7 +40,9 @@
             };
             userService
                 .createUser(user)
-                .then(findAllUsers());
+                .then(function () {
+                    init();
+                })
         }
     }
 })

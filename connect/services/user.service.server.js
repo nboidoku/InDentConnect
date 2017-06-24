@@ -285,6 +285,7 @@ function isAdmin(req, res, next) {
 }
 
 function checkAdmin(req, res) {
+    console.log('here');
     if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
         res.json(req.user)
     }

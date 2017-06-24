@@ -41,13 +41,11 @@
         <div class="col-xs-12 col-sm-8">
             <label for="name">Name of Task</label>
             <input id="name"
-                   readonly
                    placeholder="Name of the task"
                    ng-model="model.task.name"
                    class="form-control"/>
             <label for="description">Description</label>
             <textarea id="description"
-                      readonly
                       class="form-control"
                       placeholder="Write a short description of the task at and what you need to be done"
                       ng-model="model.task.description"
@@ -55,11 +53,13 @@
         </textarea>
             <label for="category">Category</label>
             <input id="category"
-                   readonly
                    placeholder="category"
                    ng-model="model.task.category"
                    class="form-control"
             />
+
+            <button class="btn btn-block btn-success">Update</button>
+            <button class="btn btn-block btn-danger">Delete</button>
         </div>
     </div>
 

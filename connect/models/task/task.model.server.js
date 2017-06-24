@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var taskSchema = require('./task.schema.server');
-var taskModel = mongoose.Schema('TaskModel', taskSchema);
+var taskModel = mongoose.model('TaskModel', taskSchema);
 
 
 taskModel.findAllTasksForUser = findAllTasksForUser;
@@ -8,6 +8,8 @@ taskModel.findTaskById = findTaskById;
 taskModel.createTask = createTask;
 taskModel.updateTask = updateTask;
 taskModel.deleteTask = deleteTask;
+
+module.exports = taskModel;
 
 
 function findAllTasksForUser(userId) {
