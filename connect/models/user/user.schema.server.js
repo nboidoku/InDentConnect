@@ -4,6 +4,7 @@ var userSchema = mongoose.Schema({
     firstName: {type: String, require: true},
     lastName: {type: String, require: true},
     email: {type: String, require: true},
+    tasks: [{type: mongoose.Schema.ObjectId, ref:'TaskModel'}],
     dob: Date,
     google: {
         id: String,

@@ -29,24 +29,27 @@
                 }
             })
             .when('/admin', {
-                templateUrl: 'views/admin/templates/admin.view.client.html'/*,
+                templateUrl: 'views/admin/templates/admin.view.client.html',
                 resolve: {
                     currentUser: checkAdmin
-                }*/
+                }
             })
             .when('/admin/users', {
                 templateUrl: 'views/admin/templates/admin-users.view.client.html',
                 controller: 'adminUsersController',
-                controllerAs: 'model'/*,
+                controllerAs: 'model',
                 resolve: {
                     currentUser: checkAdmin
-                }*/
+                }
             })
-            /*.when('user/:userId/task', {
+            .when('user/task', {
                 templateUrl: 'views/task/templates/task-home.view.client.html',
                 controller: 'taskHomeController',
-                controllerAs: 'model'
-            })
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })/*
             .when('user/:userId/task/new', {
                 templatesUrl: 'views/task/templates/task-new.view.client.html',
                 controller: 'taskNewController',

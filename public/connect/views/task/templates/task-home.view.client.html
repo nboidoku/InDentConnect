@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="container">
+    <ul class="list-group">
+        <li class="list-group-item active">
+            <div class="row">
+                <div class="col-lg-6 col-md-7 col-xs-8">
+                    Task
+                </div>
+                <div class="col-lg-2 col-md-3 hidden-sm hidden-xs">
+                    Created
+                </div>
+                <div class="col-lg-2 hidden-md hidden-sm hidden-xs">
+                    Updated
+                </div>
+                <div class="col-lg-1 col-md-1 col-xs-2">
+                    Accepted
+                </div>
+                <div class="col-lg-1 col-md-1 col-xs-2">
+                    <span class="glyphicon glyphicon-plus pull-right"></span>
+                </div>
+            </div>
+        </li>
+        <li ng-repeat="task in model.tasks" class="list-group-item">
+            <div class="row">
+                <div class="col-lg-6 col-md-7 col-xs-8">
+                    {{task.description}}
+                </div>
+                <div class="col-lg-2 col-md-3 hidden-sm hidden-xs">
+                    {{task.created}}
+                </div>
+                <div class="col-lg-2 hidden-md hidden-sm hidden-xs">
+                    {{task.updated}}
+                </div>
+                <div class="col-lg-1 col-md-1 col-xs-2 text-center">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </div>
+                <div class="col-lg-1 col-md-1 col-xs-2">
+                    <span class="glyphicon glyphicon-cog pull-right"></span>
+                </div>
+            </div>
+        </li>
+    </ul>
 
-</body>
-</html>
+</div>
