@@ -214,7 +214,6 @@ function deleteUser(req, res) {
 
 function updateUser(req, res) {
     var user = req.body;
-    console.log(user);
     var userId = req.params['userId'];
     userModel
         .updateUser(userId, user)
@@ -285,7 +284,6 @@ function isAdmin(req, res, next) {
 }
 
 function checkAdmin(req, res) {
-    console.log('here');
     if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
         res.json(req.user)
     }

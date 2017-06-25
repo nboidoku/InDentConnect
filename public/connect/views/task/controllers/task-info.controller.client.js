@@ -20,7 +20,6 @@
                 .findTaskById(model.taskId)
                 .then(function (task) {
                     model.task = task;
-                    console.log(task)
                 })
         }
         init();

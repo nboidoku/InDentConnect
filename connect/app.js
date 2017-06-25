@@ -3,7 +3,7 @@ var app = require('../express');
 var mongoose = require('mongoose');
 mongoose.Promise = require('q').Promise;
 
-var connectionString = 'mongodb://localhost/webdev'; // for local
+var connectionString = 'mongodb://localhost/InDentConnect'; // for local
 
 if(process.env.MLAB_USERNAME_WEBDEV) { // check if running remotely
     var username = process.env.MLAB_USERNAME_WEBDEV; // get from environment

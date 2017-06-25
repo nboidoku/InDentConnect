@@ -5,6 +5,10 @@ var userSchema = mongoose.Schema({
     lastName: {type: String, require: true},
     email: {type: String, require: true},
     tasks: [{type: mongoose.Schema.ObjectId, ref:'TaskModel'}],
+    location: {
+        lat: String,
+        lng: String
+    },
     dob: Date,
     google: {
         id: String,
@@ -18,7 +22,7 @@ var userSchema = mongoose.Schema({
     username: {type: String, require: true},
     password: {type: String},
     rating: Number,
-    followers: [{type: mongoose.Schema.ObjectId, ref: "UserModel"}]
+    following: [{type: mongoose.Schema.ObjectId, ref: "UserModel"}]
 }, {collection: "users"});
 
 module.exports = userSchema;

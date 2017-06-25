@@ -42,7 +42,7 @@
         }
 
         function deleteTask(taskId) {
-            var url = '/api/connect/task' + taskId;
+            var url = '/api/connect/task/' + taskId;
             return $http
                 .delete(url)
                 .then(function (response) {
@@ -51,7 +51,7 @@
         }
 
         function updateTask(taskId, task) {
-            var url = '/api/connect/task' + taskId;
+            var url = '/api/connect/task/' + taskId;
             return $http
                 .put(url, task)
                 .then(function (response) {

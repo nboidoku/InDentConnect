@@ -24,9 +24,11 @@
             <ul class="nav navbar-nav">
                 <li ng-if="!model.loggedIn"><a href="#!/login">Login
                 </a></li>
-                <li ng-if="!model.logged"><a href="#!/register">
+                <li ng-if="!model.loggedIn"><a href="#!/register">
                     Register</a></li>
                 <li ng-if="model.loggedIn"><a href="#!/profile">Profile
+                </a></li>
+                <li ng-if="model.loggedIn"><a href="#!/user/task">My Tasks
                 </a></li>
                 <li ng-if="model.loggedIn"><a href="" ng-click="model.logout()">Logout</a></li>
                 <!--<li class="dropdown">

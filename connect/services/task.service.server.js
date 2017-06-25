@@ -26,9 +26,10 @@ function findTaskForUser(req, res) {
 }
 
 function updateTask(req, res) {
-    var taskId = req.params['taskId']
+    var taskId = req.params['taskId'];
+    var task = req.body;
     taskModel
-        .updateTask(taskId)
+        .updateTask(taskId, task)
         .then(function (response) {
             res.send(response)
         })

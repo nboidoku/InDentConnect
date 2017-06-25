@@ -7,11 +7,17 @@
     function profileController(currentUser, $location, $routeParams, userService) {
 
         var model = this;
-        var userId = currentUser._id;
+        //var userId = currentUser._id;
         model.updateUser = updateUser;
         model.unregister = unregister;
         model.user = currentUser;
         model.logout = logout;
+        model.fullProfile = fullProfile;
+
+
+        function fullProfile() {
+            return currentUser.firstName && currentUser.lastName;
+        }
 
 
         function unregister() {

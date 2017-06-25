@@ -10,6 +10,26 @@
         // event handlers
         model.register = register;
 
+        function initLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation
+                    .getCurrentPosition(function (position) {
+                            model.pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                        },
+                        function() {
+                            console.log('geolocation failed')
+                        })
+            }
+            else {
+                console.log('browser does not support geolocation')
+            }
+        }
+
+        initLocation();
+
         // implementation
         function register(username, password, password2, email, dob) {
 
@@ -74,7 +94,11 @@
                         username:username,
                         password:password,
                         email: email,
-                        dob: dob
+                        dob: dob,
+                        location: {
+                            lat: model.pos.lat,
+                            lng: model.pos.lng
+                        }
                     };
                     userService
                         .register(user)

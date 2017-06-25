@@ -44,7 +44,7 @@
         <a ng-click="model.updateUser(model.user)"
            class="btn btn-block btn-success">Update</a>
 
-        <a ng-if="model.user.firstName && model.user.lastName"
+        <a ng-if="model.fullProfile()"
            href="#!/user/task"
            class="btn btn-block btn-primary">Task Page</a>
 

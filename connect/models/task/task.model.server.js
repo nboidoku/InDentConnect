@@ -27,11 +27,12 @@ function createTask(task) {
 }
 
 function updateTask(taskId, task) {
+
     return taskModel.update({_id: taskId}, {
         $set: {
             name: task.name,
             description: task.description,
-            dateUpdated: date.now()
+            dateUpdated: Date.now()
         }
     })
 }

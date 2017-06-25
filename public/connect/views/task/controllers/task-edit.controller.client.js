@@ -9,6 +9,7 @@
        model.taskId = $routeParams['taskId'];
 
        model.updateTask = updateTask;
+       model.deleteTask = deleteTask;
 
        function init() {
            taskService
@@ -20,16 +21,23 @@
                .findTaskById(model.taskId)
                .then(function (task) {
                    model.task = task;
-                   console.log(task)
                })
        }
        init();
 
        function updateTask(task) {
            taskService
-               .updateTask(taskId, task)
+               .updateTask(model.taskId, task)
                .then(function () {
-                   $location.url('/user/task/'+taskId);
+                   $location.url('/user/task/'+model.taskId);
+               })
+       }
+
+       function deleteTask() {
+           taskService
+               .deleteTask(model.taskId)
+               .then(function () {
+                   $location.url('/user/task')
                })
        }
 
