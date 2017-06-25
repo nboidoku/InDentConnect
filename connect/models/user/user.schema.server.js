@@ -5,6 +5,7 @@ var userSchema = mongoose.Schema({
     lastName: {type: String, require: true},
     email: {type: String, require: true},
     tasks: [{type: mongoose.Schema.ObjectId, ref:'TaskModel'}],
+    skill: String,
     location: {
         lat: String,
         lng: String

@@ -110,5 +110,20 @@
             });
         return deferred.promise;
     }
+
+    function checkContractor($q, $location, userService) {
+        var deferred = $q.defer();
+        userService
+            .checkContractor()
+            .then(function (currentUser) {
+                if(currentUser === '0') {
+                    deferred.resolve({});
+                    $location.url('/');
+                } else {
+                    deferred.resolve(currentUser);
+                }
+            });
+        return deferred.promise;
+    }
 })
 ();

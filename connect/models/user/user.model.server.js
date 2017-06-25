@@ -10,6 +10,7 @@ userModel.findAllUsers = findAllUsers;
 userModel.deleteUser = deleteUser;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.findUserByFacebookId = findUserByFacebookId;
+userModel.findUserByEmail = findUserByEmail;
 
 
 module.exports = userModel;
@@ -23,7 +24,7 @@ function findUserByFacebookId(facebookId) {
 }
 
 function createUser(user) {
-    user.roles = ['CLIENT'];
+    user.roles.push('CLIENT');
     return userModel
         .create(user)
 }
@@ -36,11 +37,16 @@ function findUserByUsername(username) {
     return userModel.findOne({username: username});
 }
 
+function findUserByEmail(email) {
+    return userModel.findOne({email:email});
+}
+
 function updateUser(userId, user) {
     return userModel.update({_id: userId}, {
         $set:{
             firstName : user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            skill: user.skill
         }
     })
 }

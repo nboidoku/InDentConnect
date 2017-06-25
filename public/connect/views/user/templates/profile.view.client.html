@@ -41,6 +41,15 @@
                ng-model="model.user.email"
         />
 
+        <div ng-show="model.isContractor">
+            <label for="skill">Skill</label>
+            <input id="skill"
+                   placeholder="skill"
+                   class="form-control"
+                   ng-model="model.user.skill"
+            />
+        </div>
+
         <a ng-click="model.updateUser(model.user)"
            class="btn btn-block btn-success">Update</a>
 

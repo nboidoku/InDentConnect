@@ -12,12 +12,14 @@
             logout:logout,
             checkLoggedIn: checkLoggedIn,
             checkAdmin: checkAdmin,
+            checkContractor: checkContractor,
             findAllUsers: findAllUsers,
             register: register,
             createUser: createUser,
             deleteUser: deleteUser,
             unregister: unregister,
-            updateUser: updateUser
+            updateUser: updateUser,
+            findUserByEmail: findUserByEmail
         };
 
         function createUser(user) {
@@ -66,6 +68,15 @@
                 .get(url)
                 .then(function (response) {
                     return response.data;
+                })
+        }
+
+        function findUserByEmail(email) {
+            var url = "/api/connect/user?email="+ email;
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data
                 })
         }
 
@@ -130,6 +141,17 @@
                 });
 
         }
+
+        function checkContractor() {
+            var url = "/api/connect/checkContractor";
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+
     }
 })
 ();

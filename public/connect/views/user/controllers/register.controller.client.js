@@ -9,6 +9,7 @@
 
         // event handlers
         model.register = register;
+        model.registerContractor = registerContractor;
 
         function initLocation() {
             if (navigator.geolocation) {
@@ -19,7 +20,7 @@
                                 lng: position.coords.longitude
                             };
                         },
-                        function() {
+                        function () {
                             console.log('geolocation failed')
                         })
             }
@@ -66,7 +67,6 @@
             userService
                 .findUserByUsername(username)
                 .then(function (found) {
-                    console.log(found);
                     if (found) {
                         handleError('username')
                     }
@@ -91,8 +91,8 @@
                 }
                 else {
                     var user = {
-                        username:username,
-                        password:password,
+                        username: username,
+                        password: password,
                         email: email,
                         dob: dob,
                         location: {
@@ -102,7 +102,7 @@
                     };
                     userService
                         .register(user)
-                        .then(function (user) {
+                        .then(function () {
                             $location.url('/profile');
                         })
                 }
@@ -110,9 +110,9 @@
             }
 
             function handleError(error) {
-                switch(error) {
+                switch (error) {
                     case 'username':
-                        model.error = "Username " + username+ " is not" +
+                        model.error = "Username " + username + " is not" +
                             " available";
                         break;
                     case 'password':
@@ -123,6 +123,106 @@
                 }
             }
 
+        }
+
+
+        function registerContractor(username, password, password2, email, dob, skill) {
+
+            model.emptyUsername = "";
+            model.emptyPassword = "";
+            model.emptyPassword2 = "";
+
+
+            if (!username) {
+                model.emptyUsername = "enter a username";
+                return
+            }
+
+            if (!password) {
+                model.emptyPassword = "enter a password";
+                return
+            }
+
+            if (!password2) {
+                model.emptyPassword2 = "retype password";
+                return
+            }
+
+            if (!email) {
+                model.emptyEmail = "Please enter email"
+            }
+
+            if (!dob) {
+                model.emptyDob = "Please enter a date of birth"
+            }
+
+
+            userService
+                .findUserByUsername(username)
+                .then(function (found) {
+                    if (found) {
+                        handleError('username')
+                    }
+                    else {
+                        registerUser();
+                    }
+                });
+
+            userService
+                .findUserByEmail(email)
+                .then(function (found) {
+                    if (found) {
+                        handleError('email')
+                    }
+                    else {
+                        registerUser();
+
+                    }
+                });
+
+            function registerUser() {
+
+                if (password !== password2) {
+                    handleError('password')
+                }
+                else {
+                    var user = {
+                        username: username,
+                        password: password,
+                        email: email,
+                        dob: dob,
+                        roles: ['CONTRACTOR'],
+                        location: {
+                            lat: model.pos.lat,
+                            lng: model.pos.lng
+                        },
+                        skill: skill
+                    };
+                    userService
+                        .register(user)
+                        .then(function () {
+                            $location.url('/profile');
+                        })
+                }
+
+            }
+
+            function handleError(error) {
+                switch (error) {
+                    case 'username':
+                        model.error = "Username " + username + " is not" +
+                            " available";
+                        break;
+                    case 'password':
+                        model.error = "passwords must match";
+                        break;
+                    case 'email':
+                        model.error = 'email already in use';
+                        break;
+                    default:
+                        model.error = "error, please try again";
+                }
+            }
         }
     }
 })();

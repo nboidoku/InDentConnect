@@ -11,7 +11,7 @@ passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
 
 app.get('/api/connect/users', isAdmin, findUser);
-app.get('/api/connect/user', findUserByUsername);
+app.get('/api/connect/user', findUserBy);
 app.get('/api/connect/user/:userId', findUserById);
 app.post('/api/connect/user', createUser);
 app.put('/api/connect/user/:userId', updateUser);
@@ -21,11 +21,12 @@ app.delete('/api/connect/unregister', unregister);
 app.post('/api/connect/login', passport.authenticate('local'), login);
 app.get('/api/connect/checkLoggedIn', checkLoggedIn);
 app.get('/api/connect/checkAdmin', checkAdmin);
+app.get('/spi/connect/checkContractor', checkContractor);
 app.post('/api/connect/register', register);
 app.post('/api/connect/logout', logout);
 
 app.get('/auth/google', passport.authenticate('google', {scope: ['profile', 'email']}));
-app.get ('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email']}));
 
 var googleConfig = {
     clientID: process.env.GOOGLE_CLIENT_ID,
@@ -42,10 +43,10 @@ app.get('/auth/google/callback',
     }));
 
 var facebookConfig = {
-    clientID     : process.env.FACEBOOK_CLIENT_ID,
-    clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL  : process.env.FACEBOOK_CALLBACK_URL,
-    profileFields : ['id', 'emails', 'name']
+    clientID: process.env.FACEBOOK_CLIENT_ID,
+    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    callbackURL: process.env.FACEBOOK_CALLBACK_URL,
+    profileFields: ['id', 'emails', 'name']
 };
 
 passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
@@ -121,35 +122,39 @@ function facebookStrategy(token, refreshToken, profile, done) {
     userModel
         .findUserByFacebookId(profile.id)
         .then(
-            function(user) {
-                if(user) {
+            function (user) {
+                if (user) {
                     return done(null, user);
                 } else {
                     var email = profile.emails[0].value;
                     var emailParts = email.split("@");
                     var newFacebookUser = {
-                        username:  emailParts[0],
+                        username: emailParts[0],
                         firstName: profile.name.givenName,
-                        lastName:  profile.name.familyName,
-                        email:     email,
+                        lastName: profile.name.familyName,
+                        email: email,
                         facebook: {
-                            id:    profile.id,
+                            id: profile.id,
                             token: token
                         }
                     };
                     return userModel.createUser(newFacebookUser);
                 }
             },
-            function(err) {
-                if (err) { return done(err); }
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
             }
         )
         .then(
-            function(user){
+            function (user) {
                 return done(null, user);
             },
-            function(err){
-                if (err) { return done(err); }
+            function (err) {
+                if (err) {
+                    return done(err);
+                }
             }
         );
 }
@@ -260,11 +265,20 @@ function findUser(req, res) {
 
 }
 
-function findUserByUsername(req, res) {
+
+function findUserBy(req, res) {
     if (req.query['username']) {
         var username = req.query['username'];
         userModel
             .findUserByUsername(username)
+            .then(function (user) {
+                res.json(user)
+            })
+    }
+    else if(req.query['email']) {
+        var email = req.query['email'];
+        userModel
+            .findUserByEmail(email)
             .then(function (user) {
                 res.json(user)
             })
@@ -285,6 +299,15 @@ function isAdmin(req, res, next) {
 
 function checkAdmin(req, res) {
     if (req.isAuthenticated() && req.user.roles.indexOf('ADMIN') > -1) {
+        res.json(req.user)
+    }
+    else {
+        res.send('0')
+    }
+}
+
+function checkContractor(req, res) {
+    if (req.isAuthenticated() && req.user.roles.indexOf('CONTRACTOR') > -1) {
         res.json(req.user)
     }
     else {

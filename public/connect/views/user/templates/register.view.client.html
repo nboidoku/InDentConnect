@@ -60,11 +60,30 @@
            ng-model="dob"
     />
 
+    <label for="asContractor">Sign up as a contractor</label>
+    <input id="asContractor"
+           type="checkbox"
+           ng-model="asContractor"
+    />
 
-    <button ng-click="model.register(username, password, verify, email, dob)"
+    <div ng-show="asContractor">
+        <label for="skill">Skill</label>
+        <input id="skill"
+               ng-model="skill"
+               class="form-control"
+        />
+    </div>
+
+    <button ng-if="!asContractor" ng-click="model.register(username, password, verify, email, dob)"
             class="btn btn-block btn-success">
         Register
     </button>
+
+    <button ng-if="asContractor" ng-click="model.registerContractor(username, password, verify, email, dob, skill)"
+            class="btn btn-block btn-success">
+        Register As Contractor
+    </button>
+
     <a href="#!/login">
         Already have an account? Sign in here
     </a>

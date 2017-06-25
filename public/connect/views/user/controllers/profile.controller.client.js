@@ -4,7 +4,7 @@
         .controller('profileController', profileController);
 
 
-    function profileController(currentUser, $location, $routeParams, userService) {
+    function profileController(currentUser, $location, userService) {
 
         var model = this;
         //var userId = currentUser._id;
@@ -14,6 +14,8 @@
         model.logout = logout;
         model.fullProfile = fullProfile;
 
+
+        model.isContractor = model.user.roles.indexOf('CONTRACTOR') > -1;
 
         function fullProfile() {
             return currentUser.firstName && currentUser.lastName;
