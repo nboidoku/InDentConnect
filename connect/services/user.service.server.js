@@ -209,7 +209,7 @@ function findUserById(req, res) {
 }
 
 function deleteUser(req, res) {
-    var userId = req.params.userId;
+    var userId = req.params['userId'];
     userModel
         .deleteUser(userId)
         .then(function (status) {

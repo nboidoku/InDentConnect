@@ -14,7 +14,8 @@
             createTask: createTask,
             findAllTasks: findAllTasks,
             applyForTask: applyForTask,
-            findAllApplicantsForTask: findAllApplicantsForTask
+            findAllApplicantsForTask: findAllApplicantsForTask,
+            addContractor: addContractor
         };
 
         function findAllTasksForUser() {
@@ -83,6 +84,15 @@
                 .put(url, task)
                 .then(function (response) {
                     return response.data
+                })
+        }
+
+        function addContractor(taskId, userId) {
+            var url = '/api/connect/task/'+taskId+'/'+ userId+'/add';
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data;
                 })
         }
     }

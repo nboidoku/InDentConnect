@@ -24,9 +24,7 @@ function findUserByFacebookId(facebookId) {
 }
 
 function createUser(user) {
-    user.roles.push('CLIENT');
-    return userModel
-        .create(user)
+    return userModel.create(user)
 }
 
 function findUserById(userId) {
@@ -36,6 +34,7 @@ function findUserById(userId) {
 function findUserByUsername(username) {
     return userModel.findOne({username: username});
 }
+
 
 function findUserByEmail(email) {
     return userModel.findOne({email:email});

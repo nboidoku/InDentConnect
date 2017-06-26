@@ -90,7 +90,7 @@
                     currentUser: checkLoggedIn
                 }
             })
-            .when('/user/contractor/:contractorId', {
+            .when('/user/contractor/:taskId/:contractorId', {
                 templateUrl: 'views/contractor/templates/contractor-details.view.client.html',
                 controller: 'contractorDetailController',
                 controllerAs: 'model',

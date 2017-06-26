@@ -22,7 +22,7 @@ var userSchema = mongoose.Schema({
     roles: [{type: String, default: 'CLIENT', enum: ['CLIENT', 'CONTRACTOR', 'ADMIN']}],
     username: {type: String, require: true},
     password: {type: String},
-    rating: Number,
+    rating: {type: Number, default:4},
     _following: [{type: mongoose.Schema.ObjectId, ref: "UserModel"}]
 }, {collection: "users"});
 

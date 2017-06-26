@@ -10,6 +10,7 @@
 
         model.taskId = $routeParams['taskId'];
 
+
         function init() {
             taskService
                 .findAllTasksForUser(currentUser._id)
@@ -20,6 +21,8 @@
                 .findTaskById(model.taskId)
                 .then(function (task) {
                     model.task = task;
+                    console.log(model.task);
+
                 });
             taskService
                 .findAllApplicantsForTask(model.taskId)

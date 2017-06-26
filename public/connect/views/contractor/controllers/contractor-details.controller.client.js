@@ -4,13 +4,15 @@
         .module('InDentConnect')
         .controller('contractorDetailController', contractorDetailController);
 
-    function contractorDetailController($routeParams, userService) {
+    function contractorDetailController($routeParams, userService, $location, taskService) {
 
         var model = this;
 
         model.userId = $routeParams['contractorId'];
 
+        model.chooseContractor = chooseContractor;
 
+        model.taskId = $routeParams['taskId'];
 
         function init() {
             userService
@@ -22,6 +24,13 @@
 
         init();
 
+        function chooseContractor() {
+            taskService
+                .addContractor(model.taskId, model.userId)
+                .then(function () {
+                    $location.url('/user/task/'+ model.taskId);
+                })
+        }
 
     }
 

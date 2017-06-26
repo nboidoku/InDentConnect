@@ -10,6 +10,7 @@ taskModel.updateTask = updateTask;
 taskModel.deleteTask = deleteTask;
 taskModel.findAllTasks = findAllTasks;
 taskModel.findAllApplicantsForTask = findAllApplicantsForTask;
+taskModel.addContractor = addContractor;
 
 module.exports = taskModel;
 
@@ -25,6 +26,17 @@ function findAllTasks() {
 function findTaskById(taskId) {
     return taskModel
         .findById(taskId)
+}
+
+function addContractor(taskId, userId) {
+    console.log(userId)
+    return taskModel
+        .update({_id: taskId}, {
+        $set: {
+            _contractor: userId,
+            accepted: 'YES'
+        }
+    })
 }
 
 function findAllApplicantsForTask(taskId) {

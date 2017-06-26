@@ -18,6 +18,25 @@
                 {{model.user.email}}
             </div>
         </li>
+        <li class="row list-group-item">
+            <div class="col-xs-3">
+                Skill
+            </div>
+            <div class="col-xs-9 text-center">
+                {{model.user.skill}}
+            </div>
+        </li>
+        <li class="row list-group-item">
+            <div class="col-xs-3">
+                Rating :
+            </div>
+            <div class="col-xs-9 text-center">
+                {{model.user.rating}}
+            </div>
+        </li>
     </ul>
+    <button ng-click="model.chooseContractor()" class="btn btn-primary btn-block">
+            Choose Contractor
+    </button>
 
 </div>

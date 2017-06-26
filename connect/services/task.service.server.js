@@ -9,6 +9,7 @@ app.post('/api/connect/task', createTask);
 app.get('/api/connect/task-list', findAllTasks);
 app.get('/api/connect/task/:taskId/apply', applyForTask);
 app.get('/api/connect/task/:taskId/followers', findAllApplicantsForTask);
+app.get('/api/connect/task/:taskId/:userId/add', addContractor);
 
 function findAllTasksForUser(req, res) {
     userId = req.user._id;
@@ -17,6 +18,17 @@ function findAllTasksForUser(req, res) {
         .then(function (tasks) {
             res.json(tasks)
         })
+}
+
+function addContractor(req, res) {
+    taskId = req.params['taskId'];
+    userId = req.params['userId'];
+    taskModel
+        .addContractor(taskId, userId)
+        .then(function () {
+            res.sendStatus(200);
+        })
+
 }
 
 function findAllApplicantsForTask(req, res) {
