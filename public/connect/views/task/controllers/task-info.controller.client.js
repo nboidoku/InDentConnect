@@ -1,7 +1,7 @@
 (function () {
-   angular
-       .module('InDentConnect')
-       .controller('taskInfoController', taskInfoController);
+    angular
+        .module('InDentConnect')
+        .controller('taskInfoController', taskInfoController);
 
 
     function taskInfoController($routeParams, taskService, currentUser) {
@@ -9,7 +9,6 @@
         var model = this;
 
         model.taskId = $routeParams['taskId'];
-
 
         function init() {
             taskService
@@ -29,7 +28,16 @@
                 .then(function (contractors) {
                     model.contractors = contractors;
                 })
+                .then(function () {
+                    for (var u in model.contractors) {
+                        if (model.contractors[u]._id === model.task._contractor) {
+                            model.contractor = model.contractors[u];
+                        }
+                    }
+                })
+
         }
+
         init();
 
 

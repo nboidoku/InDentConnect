@@ -98,12 +98,11 @@
                     currentUser: checkLoggedIn
                 }
             })
-            /*
             .when('/news', {
                 templateUrl: 'views/news/templates/news-list.view.client.html',
                 controller: 'newsListController',
                 controllerAs: 'model'
-            })*/
+            })
     }
 
     function checkLoggedIn($q, $location, userService) {

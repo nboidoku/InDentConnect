@@ -61,8 +61,15 @@
                    ng-model="model.task.category"
                    class="form-control"
             />
+            <div ng-show="model.task._contractor">
+                <label for="contractor">Contractor</label>
+                <input id="contractor"
+                       class="form-control"
+                       readonly
+                       ng-model="model.contractor.firstName + model.contractor.lastName"/>
+            </div>
         </div>
-        <div ng-show="!model.task._contractor">
+        <div>
             <div class="col-sm-4 col-xs-12">
                 <ul class="list-group">
                     <li class="list-group-item active text-center">

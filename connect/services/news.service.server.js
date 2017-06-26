@@ -1,3 +1,43 @@
-/**
- * Created by niiakoboi-doku on 6/15/17.
- */
+var app = require('../../express');
+var newsModel = require('../models/news/news.model.server');
+
+app.get('/api/connect/news', findAllNews);
+app.post('/api/connect/news', createNews);
+app.get('/api/connect/news/client/:userId', findNewsForClient);
+app.get('/api/connect/news/contractor/:userId', findNewsForContractor);
+
+function createNews(req, res) {
+    var news = req.body;
+    news.date = Date.now();
+    newsModel
+        .createNews(news)
+        .then(function (news) {
+            res.json(news)
+        })
+}
+
+function findNewsForClient(req, res) {
+    userId = req.params['userId'];
+    newsModel
+        .findNewsByClient(userId)
+        .then(function (news) {
+            res.json(news)
+        })
+}
+
+function findNewsForContractor(req, res) {
+    userId = req.params['userId'];
+    newsModel
+        .findNewsByContractor(userId)
+        .then(function (news) {
+            res.json(news)
+        })
+}
+
+function findAllNews(req, res) {
+    newsModel
+        .findAllNews
+        .then(function (news) {
+            res.json(news);
+        })
+}
