@@ -4,7 +4,7 @@
         .module('InDentConnect')
         .controller('contractorDetailController', contractorDetailController);
 
-    function contractorDetailController($routeParams, userService, $location, taskService) {
+    function contractorDetailController($routeParams, userService, $location, taskService, newsService) {
 
         var model = this;
 
@@ -29,7 +29,12 @@
                 .addContractor(model.taskId, model.userId)
                 .then(function () {
                     $location.url('/user/task/'+ model.taskId);
-                })
+                });
+            var news = {
+                _contractor : model.userId
+            };
+            newsService
+                .createNews(news);
         }
 
     }

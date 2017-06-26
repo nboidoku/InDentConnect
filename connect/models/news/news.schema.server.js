@@ -8,4 +8,4 @@ var newsSchema = mongoose.Schema({
     {collection: 'news'});
 
 
-module.exports = newsSchema
+module.exports = newsSchema;

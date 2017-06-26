@@ -8,9 +8,10 @@ app.get('/api/connect/news/contractor/:userId', findNewsForContractor);
 
 function createNews(req, res) {
     var news = req.body;
+    news._client = req.user._id;
     news.date = Date.now();
     newsModel
-        .createNews(news)
+        .addNews(news)
         .then(function (news) {
             res.json(news)
         })
@@ -36,7 +37,7 @@ function findNewsForContractor(req, res) {
 
 function findAllNews(req, res) {
     newsModel
-        .findAllNews
+        .findAllNews()
         .then(function (news) {
             res.json(news);
         })

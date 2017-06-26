@@ -20,8 +20,6 @@
                 .findTaskById(model.taskId)
                 .then(function (task) {
                     model.task = task;
-                    console.log(model.task);
-
                 });
             taskService
                 .findAllApplicantsForTask(model.taskId)
@@ -32,6 +30,7 @@
                     for (var u in model.contractors) {
                         if (model.contractors[u]._id === model.task._contractor) {
                             model.contractor = model.contractors[u];
+                            model.contractor.name = model.contractor.firstName + " " + model.contractor.lastName
                         }
                     }
                 })

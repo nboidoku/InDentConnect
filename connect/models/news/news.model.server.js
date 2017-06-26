@@ -11,7 +11,7 @@ module.exports = newsModel;
 
 
 function addNews(news) {
-    return newModel.create(news)
+    return newsModel.create(news)
 }
 
 function findNewsByClient(userId) {
@@ -23,6 +23,9 @@ function findNewsByContractor(userId) {
 }
 
 function findAllNews() {
-    return newsModel.find();
+    return newsModel
+        .find()
+        .populate('_client')
+        .populate('_contractor');
 }
 

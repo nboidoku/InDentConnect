@@ -39,7 +39,7 @@
         }
 
         function findAllNews() {
-            var url = '/api/connect/news';
+            var url = "/api/connect/news";
             return $http.get(url)
                 .then(function (response) {
                     return response.data

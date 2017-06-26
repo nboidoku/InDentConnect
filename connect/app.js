@@ -16,3 +16,4 @@ mongoose.connect(connectionString);
 
 require('./services/user.service.server');
 require('./services/task.service.server');
+require('./services/news.service.server');
