@@ -6,6 +6,9 @@ app.get('/api/connect/task/:taskId', findTaskForUser);
 app.put('/api/connect/task/:taskId', updateTask);
 app.delete('/api/connect/task/:taskId', deleteTask);
 app.post('/api/connect/task', createTask);
+app.get('/api/connect/task-list', findAllTasks);
+app.get('/api/connect/task/:taskId/apply', applyForTask);
+app.get('/api/connect/task/:taskId/followers', findAllApplicantsForTask);
 
 function findAllTasksForUser(req, res) {
     userId = req.user._id;
@@ -16,6 +19,23 @@ function findAllTasksForUser(req, res) {
         })
 }
 
+function findAllApplicantsForTask(req, res) {
+    taskId = req.params['taskId'];
+    taskModel
+        .findAllApplicantsForTask(taskId)
+        .then(function (task) {
+            res.json(task._followers)
+        })
+}
+
+function findAllTasks(req, res) {
+    taskModel
+        .findAllTasks()
+        .then(function (tasks) {
+            res.json(tasks);
+        })
+}
+
 function findTaskForUser(req, res) {
     var taskId = req.params['taskId'];
     taskModel
@@ -23,6 +43,18 @@ function findTaskForUser(req, res) {
         .then(function (task) {
             res.json(task)
         });
+}
+
+function applyForTask(req, res) {
+    var taskId = req.params['taskId'];
+    var userId = req.user._id;
+    taskModel
+        .findTaskById(taskId)
+        .then(function (task) {
+            task._followers.push(userId);
+            res.sendStatus(200);
+            return task.save();
+        })
 }
 
 function updateTask(req, res) {

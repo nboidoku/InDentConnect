@@ -1,0 +1,23 @@
+<div ng-include="'views/common/templates/navbar.view.client.html'"></div>
+
+<div class="container">
+    <ul class="list-group">
+        <li class="row list-group-item">
+            <div class="col-xs-3">
+                Name :
+            </div>
+            <div class="col-xs-9 text-center">
+                {{model.user.firstName}} {{model.user.lastName}}
+            </div>
+        </li>
+        <li class="row list-group-item">
+            <div class="col-xs-3">
+                Contact :
+            </div>
+            <div class="col-xs-9 text-center">
+                {{model.user.email}}
+            </div>
+        </li>
+    </ul>
+
+</div>

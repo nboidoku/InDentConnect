@@ -50,8 +50,24 @@
                     currentUser: checkLoggedIn
                 }
             })
+            .when('/user/task/list', {
+                templateUrl:'views/task/contractor/templates/task-list.view.client.html',
+                controller: 'taskListController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkContractor
+                }
+            })
+            .when('/user/contractor/task/:taskId', {
+                templateUrl: 'views/task/contractor/templates/task-contractor-info.view.client.html',
+                controller: 'taskContractorInfoController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkContractor
+                }
+            })
             .when('/user/task/new', {
-                templateUrl: 'views/task/templates/task-new.view.client.html',
+                templateUrl: 'views/task/client/templates/task-new.view.client.html',
                 controller: 'taskNewController',
                 controllerAs: 'model',
                 resolve: {
@@ -67,13 +83,22 @@
                 }
             })
             .when('/user/task/edit/:taskId', {
-                templateUrl: 'views/task/templates/task-edit.view.client.html',
+                templateUrl: 'views/task/client/templates/task-edit.view.client.html',
                 controller: 'taskEditController',
                 controllerAs: 'model',
                 resolve: {
                     currentUser: checkLoggedIn
                 }
-            })/*
+            })
+            .when('/user/contractor/:contractorId', {
+                templateUrl: 'views/contractor/templates/contractor-details.view.client.html',
+                controller: 'contractorDetailController',
+                controllerAs: 'model',
+                resolve: {
+                    currentUser: checkLoggedIn
+                }
+            })
+            /*
             .when('/news', {
                 templateUrl: 'views/news/templates/news-list.view.client.html',
                 controller: 'newsListController',
@@ -118,7 +143,7 @@
             .then(function (currentUser) {
                 if(currentUser === '0') {
                     deferred.resolve({});
-                    $location.url('/');
+                    $location.url('/user/task');
                 } else {
                     deferred.resolve(currentUser);
                 }

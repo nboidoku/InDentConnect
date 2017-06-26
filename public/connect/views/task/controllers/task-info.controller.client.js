@@ -20,6 +20,11 @@
                 .findTaskById(model.taskId)
                 .then(function (task) {
                     model.task = task;
+                });
+            taskService
+                .findAllApplicantsForTask(model.taskId)
+                .then(function (contractors) {
+                    model.contractors = contractors;
                 })
         }
         init();

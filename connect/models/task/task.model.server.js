@@ -8,19 +8,31 @@ taskModel.findTaskById = findTaskById;
 taskModel.createTask = createTask;
 taskModel.updateTask = updateTask;
 taskModel.deleteTask = deleteTask;
+taskModel.findAllTasks = findAllTasks;
+taskModel.findAllApplicantsForTask = findAllApplicantsForTask;
 
 module.exports = taskModel;
 
 
 function findAllTasksForUser(userId) {
-    return taskModel
-        .find({_user: userId});
+    return taskModel.find({_user: userId});
+}
+
+function findAllTasks() {
+    return taskModel.find();
 }
 
 function findTaskById(taskId) {
     return taskModel
         .findById(taskId)
 }
+
+function findAllApplicantsForTask(taskId) {
+    return taskModel
+        .findById(taskId)
+        .populate('_followers');
+}
+
 
 function createTask(task) {
     return taskModel.create(task)

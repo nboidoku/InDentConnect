@@ -7,6 +7,8 @@
 
         var model = this;
 
+        model.isContractor = currentUser.roles.indexOf('CONTRACTOR') > -1;
+
         function init() {
             taskService
                 .findAllTasksForUser(currentUser._id)

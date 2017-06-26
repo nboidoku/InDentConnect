@@ -21,7 +21,7 @@ app.delete('/api/connect/unregister', unregister);
 app.post('/api/connect/login', passport.authenticate('local'), login);
 app.get('/api/connect/checkLoggedIn', checkLoggedIn);
 app.get('/api/connect/checkAdmin', checkAdmin);
-app.get('/spi/connect/checkContractor', checkContractor);
+app.get('/api/connect/checkContractor', checkContractor);
 app.post('/api/connect/register', register);
 app.post('/api/connect/logout', logout);
 

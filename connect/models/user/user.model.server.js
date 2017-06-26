@@ -30,7 +30,7 @@ function createUser(user) {
 }
 
 function findUserById(userId) {
-    return userModel.findOne({_id: userId});
+    return userModel.findById(userId);
 }
 
 function findUserByUsername(username) {

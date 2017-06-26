@@ -11,7 +11,10 @@
             findTaskById: findTaskById,
             updateTask: updateTask,
             deleteTask: deleteTask,
-            createTask: createTask
+            createTask: createTask,
+            findAllTasks: findAllTasks,
+            applyForTask: applyForTask,
+            findAllApplicantsForTask: findAllApplicantsForTask
         };
 
         function findAllTasksForUser() {
@@ -22,6 +25,30 @@
                 })
         }
 
+        function findAllApplicantsForTask(taskId) {
+            var url = "/api/connect/task/" + taskId + "/followers";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function applyForTask(taskId) {
+            var url = "/api/connect/task/" + taskId + "/apply";
+            return $http
+                .get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function findAllTasks() {
+            var url = "/api/connect/task-list";
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data
+                })
+        }
 
         function findTaskById(taskId) {
             var url = '/api/connect/task/' + taskId;
