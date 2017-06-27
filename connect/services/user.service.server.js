@@ -217,6 +217,7 @@ function unregister(req, res) {
 function register(req, res) {
     var user = req.body;
     user.password = bcrypt.hashSync(user.password);
+    user.roles.push("CLIENT");
     userModel
         .createUser(user)
         .then(function (user) {
