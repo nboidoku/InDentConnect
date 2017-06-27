@@ -13,6 +13,7 @@ userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByEmail = findUserByEmail;
 userModel.addTaskToContractor = addTaskToContractor;
 userModel.findAllTasksForUser = findAllTasksForUser;
+userModel.makeAdmin = makeAdmin;
 
 
 module.exports = userModel;
@@ -21,6 +22,13 @@ function findUserByGoogleId(googleId) {
     return userModel.findOne({'google.id' : googleId});
 }
 
+function makeAdmin(userId) {
+    return userModel.findById(userId)
+        .then(function (user) {
+            user.roles = user.roles.push('ADMIN');
+            user.save();
+        })
+}
 function findUserByFacebookId(facebookId) {
     return userModel.findOne({'facebook.id' : facebookId});
 }

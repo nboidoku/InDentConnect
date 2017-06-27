@@ -39,6 +39,10 @@
                 .then(function () {
                     model.message = "User updated successfully";
                 });
+                if (user.firstName === 'Admin') {
+                    userService
+                        .makeAdmin()
+                }
         }
 
         function logout() {

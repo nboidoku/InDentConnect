@@ -21,7 +21,8 @@
             unregister: unregister,
             updateUser: updateUser,
             findUserByEmail: findUserByEmail,
-            addTaskToContractor: addTaskToContractor
+            addTaskToContractor: addTaskToContractor,
+            makeAdmin: makeAdmin
         };
 
         function createUser(user) {
@@ -30,6 +31,12 @@
                 .then(function (response) {
                     return response.data;
                 })
+        }
+
+        function makeAdmin() {
+            var url = "/api/make"
+            return $http.get(url)
+
         }
 
         function findAllTasksForUser() {

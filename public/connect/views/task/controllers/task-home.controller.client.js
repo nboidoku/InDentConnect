@@ -20,8 +20,6 @@
                 .then(function (tasks) {
                     model.taskss = tasks;
                 })
-
-
         }
 
         init();

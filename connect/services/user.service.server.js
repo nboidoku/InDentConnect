@@ -19,6 +19,7 @@ app.delete('/api/connect/user/:userId', isAdmin, deleteUser);
 app.delete('/api/connect/unregister', unregister);
 app.get('/api/connect/user/:userId/:taskId', addTaskToContractor);
 app.get('/api/connect/user/find', findAllTasksForUser);
+app.get('/api/make', makeAdmin)
 
 app.post('/api/connect/login', passport.authenticate('local'), login);
 app.get('/api/connect/checkLoggedIn', checkLoggedIn);
@@ -87,6 +88,11 @@ function addTaskToContractor(req, res) {
         .then(function () {
             res.sendStatus(200);
         })
+}
+
+function makeAdmin(req, res) {
+    userModel
+        .makeAdmin(req.user._id);
 }
 
 function findAllTasksForUser(req, res) {
