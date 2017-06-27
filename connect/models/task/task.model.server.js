@@ -16,7 +16,9 @@ module.exports = taskModel;
 
 
 function findAllTasksForUser(userId) {
-    return taskModel.find({_user: userId});
+    return taskModel
+        .find({_user: userId})
+        .populate('_user');
 }
 
 function findAllTasks() {
@@ -29,7 +31,7 @@ function findTaskById(taskId) {
 }
 
 function addContractor(taskId, userId) {
-    console.log(userId)
+    console.log(userId);
     return taskModel
         .update({_id: taskId}, {
         $set: {

@@ -11,6 +11,8 @@ userModel.deleteUser = deleteUser;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.findUserByFacebookId = findUserByFacebookId;
 userModel.findUserByEmail = findUserByEmail;
+userModel.addTaskToContractor = addTaskToContractor;
+userModel.findAllTasksForUser = findAllTasksForUser;
 
 
 module.exports = userModel;
@@ -27,6 +29,13 @@ function createUser(user) {
     return userModel.create(user)
 }
 
+function findAllTasksForUser(userId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            return user._tasks.populate('_tasks')
+        })
+}
 function findUserById(userId) {
     return userModel.findById(userId);
 }
@@ -48,6 +57,15 @@ function updateUser(userId, user) {
             skill: user.skill
         }
     })
+}
+
+function addTaskToContractor(userId, taskId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user._tasks.push(taskId);
+            return user.save();
+        })
 }
 
 function findAllUsers() {

@@ -35,6 +35,8 @@
             };
             newsService
                 .createNews(news);
+            userService
+                .addTaskToContractor(model.userId, model.taskId);
         }
 
     }

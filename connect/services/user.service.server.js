@@ -17,6 +17,8 @@ app.post('/api/connect/user', createUser);
 app.put('/api/connect/user/:userId', updateUser);
 app.delete('/api/connect/user/:userId', isAdmin, deleteUser);
 app.delete('/api/connect/unregister', unregister);
+app.get('/api/connect/user/:userId/:taskId', addTaskToContractor);
+app.get('/api/connect/user/find', findAllTasksForUser);
 
 app.post('/api/connect/login', passport.authenticate('local'), login);
 app.get('/api/connect/checkLoggedIn', checkLoggedIn);
@@ -75,6 +77,25 @@ function localStrategy(username, password, done) {
                 }
             }
         );
+}
+
+function addTaskToContractor(req, res) {
+    userId = req.params['userId'];
+    taskId = req.params['taskId'];
+    userModel
+        .addTaskToContractor(userId, taskId)
+        .then(function () {
+            res.sendStatus(200);
+        })
+}
+
+function findAllTasksForUser(req, res) {
+    userId = req.user._id;
+    userModel
+        .findAllTasksForUser(userId)
+        .then(function (tasks) {
+            res.json(tasks);
+        })
 }
 
 function googleStrategy(token, refreshToken, profile, done) {

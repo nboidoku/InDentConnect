@@ -7,6 +7,7 @@
     function userService($http) {
         return {
             findUserById: findUserById,
+            findAllTasksForUser: findAllTasksForUser,
             login : login,
             findUserByUsername: findUserByUsername,
             logout:logout,
@@ -19,12 +20,29 @@
             deleteUser: deleteUser,
             unregister: unregister,
             updateUser: updateUser,
-            findUserByEmail: findUserByEmail
+            findUserByEmail: findUserByEmail,
+            addTaskToContractor: addTaskToContractor
         };
 
         function createUser(user) {
             var url = "/api/connect/user";
             return $http.post(url, user)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function findAllTasksForUser() {
+            var url = '/api/connect/user/find/';
+            return $http.get(url)
+                .then(function (response) {
+                    return response.data;
+                })
+        }
+
+        function addTaskToContractor(userId, taskId) {
+            var url = "/api/connect/user/"+userId+'/'+taskId;
+            return $http.get(url)
                 .then(function (response) {
                     return response.data;
                 })
